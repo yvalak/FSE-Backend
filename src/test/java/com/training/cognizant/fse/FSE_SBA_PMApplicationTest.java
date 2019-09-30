@@ -29,14 +29,14 @@ import com.training.cognizant.fse.entities.Task;
 import com.training.cognizant.fse.entities.User;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class FSE_SBA_PMApplicationTest {
+@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
+public class FSE_SBA_PMApplicationTest  {
 
 	@LocalServerPort
 	private int port;
 	@Autowired
 	private TestRestTemplate restTemplate;
-
+	
 	@Test
 	public void testGetUsers() throws Exception {
 		assertThat(restTemplate.getForObject("http://localhost:" + port + "/pms/getUsers", List.class)).isNotEmpty();
@@ -46,15 +46,15 @@ public class FSE_SBA_PMApplicationTest {
 	@Test
 	public void testCreateUser() throws Exception {
 
-		User user = new User(0, "Amelia", "Mourismo", "326622");
+			User user = new User(0, "Amelia", "Mourismo", "326622");
 
-		final String baseUrl = "http://localhost:" + port + "/pms/createUser";
-		URI uri = new URI(baseUrl);
-		HttpEntity<User> request = new HttpEntity<>(user);
-		ResponseEntity<User> result = restTemplate.postForEntity(uri, request, User.class);
-		assertEquals(200, result.getStatusCodeValue());
-		assertEquals(result.getStatusCode(), HttpStatus.OK);
-		assertNotEquals("New User id is Not Zero ", 0, result.getBody().getUserId());
+			final String baseUrl = "http://localhost:" + port + "/pms/createUser";
+			URI uri = new URI(baseUrl);
+			HttpEntity<User> request = new HttpEntity<>(user);
+			ResponseEntity<User> result = restTemplate.postForEntity(uri, request, User.class);
+			assertEquals(200, result.getStatusCodeValue());
+			assertEquals(result.getStatusCode(), HttpStatus.OK);
+			assertNotEquals("New User id is Not Zero ", 0, result.getBody().getUserId());
 
 	}
 
@@ -77,16 +77,17 @@ public class FSE_SBA_PMApplicationTest {
 
 	@Test
 	public void testDeleteUser() throws Exception {
-		String empId = generateRandomId();
-		User user = new User(0, "Amelia", "Mourismo", empId);
+			String empId = generateRandomId();
+			User user = new User(0, "Amelia", "Mourismo", empId);
 
-		String baseUrl = "http://localhost:" + port + "/pms/createUser";
-		URI uri = new URI(baseUrl);
-		HttpEntity<User> request = new HttpEntity<>(user);
-		ResponseEntity<User> result = restTemplate.postForEntity(uri, request, User.class);
-		baseUrl = "http://localhost:" + port + "/pms/deleteUser/" + result.getBody().getUserId();
-		uri = new URI(baseUrl);
-		restTemplate.delete(uri);
+			String baseUrl = "http://localhost:" + port + "/pms/createUser";
+			URI uri = new URI(baseUrl);
+			HttpEntity<User> request = new HttpEntity<>(user);
+			ResponseEntity<User> result = restTemplate.postForEntity(uri, request, User.class);
+			baseUrl = "http://localhost:" + port + "/pms/deleteUser/" + result.getBody().getUserId();
+			uri = new URI(baseUrl);
+			restTemplate.delete(uri);
+		
 	}
 
 	@Test
@@ -190,14 +191,12 @@ public class FSE_SBA_PMApplicationTest {
 	@Test
 	public void testGetTasks() throws Exception {
 		assertThat(restTemplate.getForObject("http://localhost:" + port + "/pms/getTasks", List.class)).isNotEmpty();
-		;
 	}
 
 	@Test
 	public void testGetTaskById() throws Exception {
 		assertThat(restTemplate.getForObject("http://localhost:" + port + "/pms/getTaskById?taskId=2", Task.class))
 				.isNotNull();
-		;
 	}
 
 	@Test
@@ -205,9 +204,8 @@ public class FSE_SBA_PMApplicationTest {
 		assertThat(restTemplate.getForObject("http://localhost:" + port + "/pms/getTasksByPorjectId?projectId=0",
 				List.class)).isEmpty();
 	}
-	
+
 	private String generateRandomId() {
 		return String.valueOf((10000 + new Random().nextInt(90000)));
 	}
-
 }
