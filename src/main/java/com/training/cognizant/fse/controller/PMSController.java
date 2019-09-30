@@ -141,16 +141,7 @@ public class PMSController {
     	logger.debug("create Parent task");
     	return parentTaskServImpl.create(parentTask);
     }
-	/*@PutMapping("/updateParentTask")
-    public ParentTask updateParentTask(@RequestBody ParentTask parentTask){
-    	logger.debug("update Parent task");
-    	return parentTaskServImpl.update(parentTask);
-    }
-    @GetMapping("/getParentTask")
-    public ParentTask getParentTask(@RequestParam("parentId")long parentId){
-    	logger.debug("get Parent task");
-    	return parentTaskServImpl.findOne(parentId);
-    }*/
+	
     @GetMapping("/getParentTasks")
     public List<ParentTask> getParentTasks(){
     	logger.debug("get Parent tasks");
