@@ -9,7 +9,6 @@
 		<version>2.1.8.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<packaging>war</packaging>
 	<groupId>com.training.cognizant.fse</groupId>
 	<artifactId>pms</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
@@ -50,6 +49,17 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <configuration>
+                <archive>
+                    <manifestEntries>
+                        <splashscreen-image>${image.name}</splashscreen-image>
+                    </manifestEntries>
+                </archive>
+            </configuration>
+        </plugin>
 		</plugins>
 	</build>
 

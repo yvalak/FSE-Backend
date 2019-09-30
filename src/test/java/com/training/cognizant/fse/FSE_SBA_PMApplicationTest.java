@@ -29,7 +29,7 @@ import com.training.cognizant.fse.entities.Task;
 import com.training.cognizant.fse.entities.User;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class FSE_SBA_PMApplicationTest  {
 
 	@LocalServerPort
